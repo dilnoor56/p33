@@ -1,10 +1,10 @@
 const Engine = Matter.Engine;
 const World= Matter.World;
 const Bodies = Matter.Bodies;
-var bg,snowBody,snowImg,snow,snowImg2
+var bgImg,snowBody,snowImg,snow,snowImg2,bg
 
 function preload(){
-  bg=loadImage("snow3.jpg")
+  bgImg=loadImage("snow3.jpg")
   snowImg=loadImage("snow4.webp")
   snowImg2=loadImage("snow5.webp")
 }
@@ -13,18 +13,23 @@ function setup() {
   createCanvas(800,400);
   engine = Engine.create();
   world = engine.world;
+  bg=createSprite(400,200)
+  bg.addImage("l",bgImg)
   
+  bg.scale=1
 
 }
 
 function draw() {
-  background(bg);  
-  
+  background(0);  
+  bg.velocityX=-1
+  if(bg.x<350){ 
+   bg.velocityX=0
+    bg.x=bg.x+3
+  }
   Engine.update(engine);
   snoe()
- // rectMode(CENTER)
-  //rect(snowBody.position.x,snowBody.position.y,50,50)
-
+ 
   drawSprites();
   
 }
